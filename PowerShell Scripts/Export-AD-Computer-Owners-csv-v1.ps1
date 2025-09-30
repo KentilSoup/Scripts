@@ -1,5 +1,5 @@
 # -----------------------------------------------
-# AD-Computer-Owner-Lookup-v1.ps1
+# Export-AD-Computer-Owners-csv-v1.ps1
 # Created By: Kent Fulton
 # Last Edited: 09-30-2025
 # -----------------------------------------------
