@@ -14,7 +14,7 @@
 # - Logs all actions (updates, skips, errors, not found) to a timestamped log file
 # - Provides color-coded console output for visibility
 # -----------------------------------------------
-# DISCLAIMER
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
 # -----------------------------------------------
 # This script is provided "as-is" without any warranties, guarantees,
 # or assurances of any kind. Use of this script is at your own risk.
