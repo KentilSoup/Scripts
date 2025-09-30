@@ -11,7 +11,7 @@
 # - Captures a recent timestamp from the Security event log
 # The collected data is saved to a text file on the user's Desktop as TimeSyncAudit_Windows.txt.
 # -----------------------------------------------
-# DISCLAIMER
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
 # -----------------------------------------------
 # This script is provided "as-is" without any warranties, guarantees,
 # or assurances of any kind. Use of this script is at your own risk.
