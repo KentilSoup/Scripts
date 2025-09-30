@@ -2,7 +2,8 @@ name: Bug Report
 description: Report a problem with a PowerShell script
 title: "[Bug] <brief description>"
 labels: bug
-assignees: Kent-Fulton
+assignees:
+  - Kent-Fulton
 
 body:
   - type: markdown
