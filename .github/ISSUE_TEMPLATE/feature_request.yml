@@ -2,7 +2,8 @@ name: Feature Request
 description: Suggest a new feature or enhancement
 title: "[Feature] <brief description>"
 labels: enhancement
-assignees: Kent-Fulton
+assignees:
+  - Kent-Fulton
 
 body:
   - type: markdown
