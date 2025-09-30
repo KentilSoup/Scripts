@@ -2,7 +2,8 @@ name: Question
 description: Ask a question about the repository
 title: "[Question] <brief description>"
 labels: question
-assignees: Kent-Fulton
+assignees:
+  - Kent-Fulton
 
 body:
   - type: markdown
