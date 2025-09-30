@@ -8,7 +8,7 @@
 # Real-time output is displayed in a log box using a temporary file.
 # Scripts are expected to be located in the user's profile under C:\Users\<User>\Scripts.
 # -----------------------------------------------
-# DISCLAIMER
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
 # -----------------------------------------------
 # This script is provided "as-is" without any warranties, guarantees,
 # or assurances of any kind. Use of this script is at your own risk.
