@@ -8,7 +8,7 @@
 # The output file is saved to the current logged-in user's profile directory
 # as "output.csv" for easy access.
 # -----------------------------------------------
-# DISCLAIMER
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
 # -----------------------------------------------
 # This script is provided "as-is" without any warranties, guarantees,
 # or assurances of any kind. Use of this script is at your own risk.
