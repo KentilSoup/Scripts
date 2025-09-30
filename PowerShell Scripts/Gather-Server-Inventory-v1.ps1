@@ -1,5 +1,5 @@
 # -----------------------------------------------
-# GatherServerInventory-v1.ps1
+# Gather-Server-Inventory-v1.ps1
 # Created By: Kent Fulton
 # Last Edited: 09-30-2025
 # -----------------------------------------------
