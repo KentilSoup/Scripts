@@ -17,9 +17,8 @@
 #       - Ensuring essential services and processes are running
 #       - Quick health check of remote desktop infrastructure
 # ================================================
-# -----------------------------------------------
 # DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
-# -----------------------------------------------
+# ================================================
 # This script is provided "as-is" without any warranties, guarantees,
 # or assurances of any kind. Use of this script is at your own risk.
 #
@@ -32,7 +31,7 @@
 #
 # By using this script, you acknowledge that you understand and accept
 # these terms. If you do not agree, do not use this script.
-# -----------------------------------------------
+# ================================================
 
 # Check RDP-related services
 $services = @(
