@@ -3,6 +3,7 @@
 # Created By: Kent Fulton
 # Last Edited: 09-30-2025
 # -----------------------------------------------
+# WARNING: This script performs critical operations. Test thoroughly before use.
 # This PowerShell script reads a CSV file containing computer names and new descriptions,
 # then updates the Description field in Active Directory if changes are detected.
 # It performs the following tasks:
