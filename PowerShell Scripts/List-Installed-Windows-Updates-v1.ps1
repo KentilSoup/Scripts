@@ -16,7 +16,7 @@
 #       - Troubleshooting recent system changes
 #       - Auditing update history
 # ================================================
-# DISCLAIMER
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
 # ================================================
 # This script is provided "as-is" without any warranties, guarantees,
 # or assurances of any kind. Use of this script is at your own risk.
