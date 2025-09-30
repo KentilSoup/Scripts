@@ -9,7 +9,7 @@
 # - For computers: Name, Operating System, Description
 # Results are exported to a CSV file in the current user's profile directory.
 # -----------------------------------------------
-# DISCLAIMER
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
 # -----------------------------------------------
 # This script is provided "as-is" without any warranties, guarantees,
 # or assurances of any kind. Use of this script is at your own risk.
