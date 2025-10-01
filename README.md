@@ -2,7 +2,7 @@
 
 This is an active repository of my collection of scripts and tools I use to complete my work duties as an IT Systems Administrator.
 
-## !!! DISCLAIMER !!!
+## DISCLAIMER
 
 All scripts, files, and content provided in this repository are intended for educational and administrative use only.
 
@@ -15,7 +15,7 @@ By using any code or resources from this repository, you acknowledge and agree t
 
 If you do not agree with these terms, please refrain from using the content in this repository.
 
-## !!! MIT License !!!
+## MIT License
 
 Copyright (c) 2025 Kent Fulton
 
