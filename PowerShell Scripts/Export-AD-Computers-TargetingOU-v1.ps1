@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Export-AD-Computers-Targeting-OU-v1.ps1
+# Export-AD-Computers-TargetingOU-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script scans a specific Organizational Unit (OU) in Active Directory
 # and collects the following attributes for each computer object:
