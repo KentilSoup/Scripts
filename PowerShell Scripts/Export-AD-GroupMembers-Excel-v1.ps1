@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Export-AD-Group-Members-csv-v1.ps1
+# Export-AD-GroupMembers-Excel-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script retrieves all members of a specified Active Directory group.
 # It collects detailed information for user and computer objects:
