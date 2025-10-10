@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Script Name: Ping-For-Active-Sessions-And-Shares-v5.ps1
+# Script Name: List-TargetVM-ActiveSessions-Shares-Console-v5.ps1
 # Created By: Kent Fulton
-# Last Updated: 09-30-2025
+# Last Updated: 10-10-2025
 # Purpose: Checks the status of a remote computer by:
 #   1. Verifying if the computer is online via ping.
 #   2. Displaying a progress bar while performing checks.
