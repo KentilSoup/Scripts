@@ -1,7 +1,7 @@
 # ================================================
-# PowerShell Script: Check-RDP-Services-And-Logon-Processes-v1.ps1
+# PowerShell Script: List-RDPServices-LogonProcesses-Console-v1.ps1
 # Author: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # Description:
 #   - Verifies the status of key RDP-related services:
 #       TermService, UmRdpService, SessionEnv, RpcSs, DcomLaunch, Netlogon
