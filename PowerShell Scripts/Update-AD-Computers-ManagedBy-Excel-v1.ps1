@@ -1,7 +1,7 @@
 # ------------------------------------------------------------
-# Update-AD-Computers-ManagedBy-csv-v1.ps1
+# Update-AD-Computers-ManagedBy-Excel-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 10-01-2025
+# Last Edited: 10-10-2025
 # ------------------------------------------------------------
 # CAUTION: THIS SCRIPT WRITES TO ACTIVE DIRECTORY!
 # ------------------------------------------------------------
