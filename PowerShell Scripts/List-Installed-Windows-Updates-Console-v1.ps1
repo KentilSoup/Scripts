@@ -1,7 +1,7 @@
 # ================================================
-# PowerShell Script: List-Installed-Windows-Updates-v1.ps1
+# PowerShell Script: List-Installed-Windows-Updates-Console-v1.ps1
 # Author: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # Description:
 #   - Retrieves a list of all installed Windows updates (hotfixes).
 #   - Displays:
