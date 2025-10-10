@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Export-PowerCLI-vSphere-Inventory-And-AD-Data-csv-v1.ps1
+# Export-PowerCLI-vSphere-AD-Inventory-Excel-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script connects to multiple vCenters and retrieves VM inventory details.
 # For each VM, it collects:
