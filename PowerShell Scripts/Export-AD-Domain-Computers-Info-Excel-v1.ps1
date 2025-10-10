@@ -1,7 +1,7 @@
 # ------------------------------------------------------------
-# Export-AD-Domain-All-Computers-Info-csv-v1.ps1
+# Export-AD-Domain-Computers-Info-Excel-v1.ps1
 # Author: Kent Fulton
-# Last Edited: 10-01-2025
+# Last Edited: 10-10-2025
 # ------------------------------------------------------------
 # This script exports computer information from the entire AD domain to Excel
 # - Scans all computer objects in Active Directory
