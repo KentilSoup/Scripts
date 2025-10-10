@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Time-Sync-Audit-v1.ps1
+# Export-NTP-TimeSync-Audit-Text-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script audits time synchronization settings and logs on a Windows system.
 # It performs the following tasks:
