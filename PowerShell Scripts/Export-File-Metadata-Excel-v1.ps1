@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# File-Metadata-Export-v1.ps1
+# Export-File-Metadata-Excel-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script recursively scans a specified directory for files
 # and exports their full paths and last modified timestamps to a CSV file.
