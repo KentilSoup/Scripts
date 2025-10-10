@@ -1,8 +1,7 @@
-
 # ================================================
-# PowerShell Script: Export-EventLog-Reboots-ServiceLogs-ServiceFailures-v1.ps1
+# PowerShell Script: Export-EventLog-Reboots-ServiceLogs-ServiceFailures-Excel-v1.ps1
 # Author: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # Description:
 #   - Collects and exports system event logs from the past 7 days.
 #   - Includes:
