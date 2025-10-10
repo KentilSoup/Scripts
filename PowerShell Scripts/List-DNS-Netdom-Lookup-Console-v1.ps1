@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# DNS-Netdom-Lookup-v1.ps1
+# List-DNS-Netdom-Lookup-Console-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script queries a specified server for DNS records and Netdom aliases.
 # It performs the following tasks:
