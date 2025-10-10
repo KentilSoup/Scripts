@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Export-AD-Computer-Owners-csv-v1.ps1
+# Export-AD-Computer-Owners-Excel-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script imports a list of server names from a CSV file,
 # queries Active Directory for each server's description, OU location,
