@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Update-AD-Computer-Descriptions-csv-v1.ps1
+# Update-AD-Computer-Descriptions-Excel-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # WARNING: This script performs critical operations. Test thoroughly before use.
 # This PowerShell script reads a CSV file containing computer names and new descriptions,
