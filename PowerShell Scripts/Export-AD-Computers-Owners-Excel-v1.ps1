@@ -1,5 +1,5 @@
 # -----------------------------------------------
-# Export-AD-Computer-Owners-Excel-v1.ps1
+# Export-AD-Computers-Owners-Excel-v1.ps1
 # Created By: Kent Fulton
 # Last Edited: 10-10-2025
 # -----------------------------------------------
