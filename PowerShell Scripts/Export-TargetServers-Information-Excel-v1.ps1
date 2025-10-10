@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# Gather-Server-Inventory-v1.ps1
+# Export-TargetServers-Information-Excel-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # This PowerShell script collects detailed inventory data from a list of remote Windows servers.
 # It performs the following tasks for each server:
