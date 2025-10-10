@@ -1,7 +1,7 @@
 # -----------------------------------------------
-# List-AD-VMUserInfo-Terminal-v1.ps1
+# List-AD-VMUserInfo-Console-v1.ps1
 # Created By: Kent Fulton
-# Last Edited: 10-02-2025
+# Last Edited: 10-10-2025
 # -----------------------------------------------
 # Description:
 # This script connects to a specified VM and performs the following:
