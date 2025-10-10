@@ -1,7 +1,7 @@
 # ================================================
-# PowerShell Script: List-Service-Timeout-Events-v1.ps1
+# PowerShell Script: List-Services-TimeoutEvents-Console-v1.ps1
 # Author: Kent Fulton
-# Last Edited: 09-30-2025
+# Last Edited: 10-10-2025
 # Description:
 #   - Queries the Windows System event log for Event ID 7011
 #     from the past 7 days.
