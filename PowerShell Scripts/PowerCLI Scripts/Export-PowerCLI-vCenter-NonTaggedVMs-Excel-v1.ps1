@@ -1,5 +1,5 @@
 # -----------------------------------------------
-# Export-PowerCLI-vCenter-NonTaggedVMs-v1.ps1
+# Export-PowerCLI-vCenter-NonTaggedVMs-Excel-v1.ps1
 # Created By: Kent Fulton
 # Last Edited: 11-07-2025
 # -----------------------------------------------
