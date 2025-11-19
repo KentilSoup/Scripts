@@ -1,14 +1,14 @@
 # -----------------------------------------------
-# List-DNS-Netdom-Lookup-Console-v1.ps1
+# List-DNS-NetDOMAliases-TargetServer-Console-v2.ps1
 # Created By: Kent Fulton
-# Last Edited: 10-10-2025
+# Last Edited: 11-19-2025
 # -----------------------------------------------
-# This PowerShell script queries a specified server for DNS records and Netdom aliases.
-# It performs the following tasks:
-# - Iterates through common DNS record types (A, AAAA, CNAME, MX, NS, PTR, SOA, SRV, TXT)
-# - Uses Resolve-DnsName to retrieve and display DNS record details
-# - Executes the Netdom command to list alternate computer names (aliases)
-# Output is displayed in the console for quick inspection.
+# This script queries a specified server for common DNS record types:
+# A, AAAA, CNAME, MX, NS, PTR, SOA, SRV, and TXT.
+# It uses `Resolve-DnsName` to retrieve and display each record type.
+# Additionally, it runs `netdom computername /enum` to list the primary
+# computer name and any alternate names (aliases) associated with the server.
+# Useful for verifying DNS configurations and aliasing in AD environments.
 # -----------------------------------------------
 # DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
 # -----------------------------------------------
@@ -26,7 +26,7 @@
 # these terms. If you do not agree, do not use this script.
 # -----------------------------------------------
 
-$server = "Server1"  # Replace with actual server name
+$server = "SERVERNAME"  # Replace with actual server name
 
 Write-Host "`n--- DNS Records for $server ---`n"
 
@@ -38,7 +38,7 @@ foreach ($type in $recordTypes) {
     try {
         $records = Resolve-DnsName -Name $server -Type $type -ErrorAction SilentlyContinue
         if ($records) {
-            $records | Format-Table Name, Type, TTL, IPAddress, NameHost, MailExchange, Text, -AutoSize
+            $records | Format-Table Name, Type, TTL, IPAddress, NameHost, MailExchange, Text -AutoSize
         } else {
             Write-Host "No $type records found."
         }
@@ -47,18 +47,32 @@ foreach ($type in $recordTypes) {
     }
 }
 
-Write-Host "`n--- Netdom Aliases ---`n"
+Write-Host "`n--- Netdom Computer Names ---`n"
 
 try {
-    $netdomOutput = netdom computername $server 2>&1
-    if ($netdomOutput -match "Alternate computer names") {
-        $netdomOutput | ForEach-Object {
-            if ($_ -match "^\s+(.+)$") {
-                Write-Host "Alias: $($matches[1].Trim())"
+    if (Get-Command netdom -ErrorAction SilentlyContinue) {
+        $netdomOutput = netdom computername $server /enum 2>&1
+
+        # Filter out empty lines, success message, and header
+        $names = $netdomOutput | Where-Object {
+            $_ -and ($_ -notmatch "The command completed successfully") -and ($_ -notmatch "All of the names")
+        }
+
+        if ($names.Count -gt 0) {
+            Write-Host "Primary Name: $($names[0])"
+            if ($names.Count -gt 1) {
+                Write-Host "`nAlternate Names:"
+                foreach ($alias in $names[1..($names.Count - 1)]) {
+                    Write-Host " - $alias"
+                }
+            } else {
+                Write-Host "`nNo alternate names found."
             }
+        } else {
+            Write-Host "No names found for $server."
         }
     } else {
-        Write-Host "No Netdom aliases found."
+        Write-Host "Netdom is not installed or not in PATH."
     }
 } catch {
     Write-Host "Netdom command failed: $_"
