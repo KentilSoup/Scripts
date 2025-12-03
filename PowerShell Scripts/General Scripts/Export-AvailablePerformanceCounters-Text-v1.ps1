@@ -1,5 +1,5 @@
 # ============================================================
-# Export-AvailablePerformanceCounters-Excel-v1.ps1
+# Export-AvailablePerformanceCounters-Text-v1.ps1
 # Created By: Kent Fulton
 # Last Edited: 12-03-2025
 #
