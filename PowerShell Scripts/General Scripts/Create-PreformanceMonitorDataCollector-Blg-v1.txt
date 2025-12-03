@@ -1,0 +1,42 @@
+# ---------------------------------------------------------------
+# Create-PreformanceMonitorDataCollector-Blg-v1.txt
+# Created By: Kent Fulton
+# Last Edited: 12-03-2025
+# ---------------------------------------------------------------
+# Purpose:
+# This script creates and manages a performance counter log using
+# Logman.exe. It captures system metrics such as disk, memory,
+# network, processor, and other performance-related counters.
+# ---------------------------------------------------------------
+# Create a new performance counter log named "Perf-Counter-Log"
+# - Output file: C:\temp\Perftest.blg
+# - Format: Binary circular (overwrites oldest data)
+# - Timestamp format: mmddhhmm
+# - Max size: 500 MB
+# - Counters: LogicalDisk, Memory, Network, Paging File, PhysicalDisk,
+#             Processor, Process, Redirector, Server, System, Thread
+# - Sample interval: 1 second
+# ---------------------------------------------------------------
+# RUN IN CMD AS ADMIN
+# ---------------------------------------------------------------
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
+# ---------------------------------------------------------------
+# This script is provided "as-is" without any warranties, guarantees,
+# or assurances of any kind. Use of this script is at your own risk.
+#
+# The author assumes no responsibility or liability for any direct,
+# indirect, incidental, consequential, or punitive damages resulting
+# from the use, misuse, or inability to use this script.
+#
+# It is the user's responsibility to review, test, and validate the
+# script in a safe environment before deploying it in production.
+#
+# By using this script, you acknowledge that you understand and accept
+# these terms. If you do not agree, do not use this script.
+# ---------------------------------------------------------------
+
+Logman.exe create counter Perf-Counter-Log -o "C:\temp\Perftest.blg" -f bincirc -v mmddhhmm -max 500 -c "\LogicalDisk(*)\*" "\Memory\*" "\Network Interface(*)\*" "\Paging File(*)\*" "\PhysicalDisk(*)\*" "\Processor(*)\*" "\Process(*)\*" "\Redirector\*" "\Server\*" "\System\*" "\Thread\*" -si 00:00:01
+
+# Start the performance counter log: Logman.exe start Perf-Counter-Log
+
+# Stop the performance counter log: Logman.exe stop Perf-Counter-Log
