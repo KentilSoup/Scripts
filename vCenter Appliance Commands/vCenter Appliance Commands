@@ -1,0 +1,100 @@
+
+# ---------------------------------------------------------------
+# vCenter Appliance Commands
+# Created By: Kent Fulton
+# Last Edited: 12-03-2025
+# ---------------------------------------------------------------
+# Description:
+# This file provides a collection of useful commands for
+# troubleshooting and analyzing the vCenter Server Appliance (VCSA).
+# Each section includes a description of what the command does.
+# ---------------------------------------------------------------
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
+# -----------------------------------------------
+# This script is provided "as-is" without any warranties, guarantees,
+# or assurances of any kind. Use of this script is at your own risk.
+#
+# The author assumes no responsibility or liability for any direct,
+# indirect, incidental, consequential, or punitive damages resulting
+# from the use, misuse, or inability to use this script.
+#
+# It is the user's responsibility to review, test, and validate the
+# script in a safe environment before deploying it in production.
+#
+# By using this script, you acknowledge that you understand and accept
+# these terms. If you do not agree, do not use this script.
+# -----------------------------------------------
+
+# 1. Check size of /var/core directory
+# ---------------------------------------------------------------
+# Purpose:
+# Displays the total size of the /var/core directory, which stores
+# core dump files. Useful for monitoring disk usage and identifying
+# space issues.
+
+du -sh /var/core
+
+# 2. Check disk usage of /var/core
+# ---------------------------------------------------------------
+# Purpose:
+# Shows detailed disk usage statistics for the /var/core directory.
+# Helps determine if core dumps are consuming excessive space.
+
+df -h /var/core
+
+# 3. Display total RAM allocated to cloud services
+# ---------------------------------------------------------------
+# Purpose:
+# Lists the total RAM size allocated to cloud services on the VCSA.
+# Useful for performance tuning and resource allocation checks.
+
+cloudvm-ram-size -S
+
+# 4. List all services and their RAM allocation
+# ---------------------------------------------------------------
+# Purpose:
+# Displays all services managed by cloudvm along with their RAM
+# allocation. Helps identify memory distribution across services.
+
+cloudvm-ram-size -l
+
+# 5. Loop through VMware services and show detailed RAM info
+# ---------------------------------------------------------------
+# Purpose:
+# Iterates through all VMware-related services and prints their
+# detailed RAM allocation in JSON format for deeper analysis.
+
+for svc in $(cloudvm-ram-size -l | awk '{print $1}' | grep vmware); do
+    echo "Service: $svc"
+    cloudvm-ram-size -J $svc
+    echo "--------------------------------"
+  done
+
+# 6. Capture vCenter performance metrics using vimtop (Example)
+# ---------------------------------------------------------------
+# Purpose:
+# Collects vCenter Server Appliance performance metrics in batch
+# mode for long-term analysis. This example captures 17,280 samples
+# with a 10-second delay between each sample (~48 hours total).
+#
+# Estimated File Size:
+# Approximately 250–400 MB for 48 hours of data (depends on system load and number of metrics collected).
+#
+# Duration Calculation:
+# 17280 samples × 10 sec ÷ 3600 = 48 hours
+#
+# -b → batch mode (write to file)
+# -n 17280 → number of samples (48 hours ÷ 10 sec = 17,280)
+# -p 10 → delay between samples (10 seconds)
+# Output file → /var/core/<hostname>_<timestamp>_vimtop.csv
+# This will run for 48 hours, then stop automatically.
+# Estimated file size raw should be under 100MB with 93 GB free on /storage/core
+#
+# Article: https://knowledge.broadcom.com/external/article/313058/capturing-vcenter-server-service-resourc.htm
+
+/usr/lib/vmware-vpx/vimtop/vimtop -b -n 17280 -p 10 > /var/core/$(hostname)_$(date -u +"%Y-%m-%dT%H%M%S")_vimtop.csv
+
+
+
+
+
