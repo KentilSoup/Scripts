@@ -1,0 +1,126 @@
+# -------------------------------------------------------------------
+# DOUBLE PENDULUM SIMULATION + PCA + VISUALIZATION
+# Modular script: run all or toggle sections via comments
+# -------------------------------------------------------------------
+
+import numpy as np
+from scipy.integrate import solve_ivp
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D  # for 3D PCA
+
+# ----------------------------
+# Double pendulum parameters
+# ----------------------------
+m1 = m2 = 1.0
+l1 = l2 = 1.0
+g = 9.81
+
+def deriv(t, y):
+    theta1, z1, theta2, z2 = y
+    c = np.cos(theta1 - theta2)
+    s = np.sin(theta1 - theta2)
+    denom1 = (m1 + m2) * l1 - m2 * l1 * c**2
+    denom2 = (l2 / l1) * denom1
+    z1_dot = ((m2 * l2 * z2**2 * s - m2 * g * np.sin(theta2) * c - (m1 + m2) * g * np.sin(theta1)) / denom1)
+    z2_dot = (((m1 + m2) * (l1 * z1**2 * s - g * np.sin(theta2) + g * np.sin(theta1) * c)) / denom2)
+    return [z1, z1_dot, z2, z2_dot]
+
+# ----------------------------
+# Simulation settings
+# ----------------------------
+num_trajectories = 100
+t_span = (0, 20)
+t_eval = np.linspace(*t_span, 300)  # fewer points for speed
+
+all_data = []
+
+# ----------------------------
+# Simulate trajectories
+# ----------------------------
+for traj_id in range(num_trajectories):
+    y0 = [
+        np.pi/2 + np.random.uniform(-0.01, 0.01),
+        0,
+        np.pi/2 + np.random.uniform(-0.01, 0.01),
+        0
+    ]
+    sol = solve_ivp(deriv, t_span, y0, t_eval=t_eval, method='RK23')  # faster method
+    traj_data = np.vstack([sol.t, sol.y, np.full(sol.t.shape, traj_id)]).T
+    all_data.append(traj_data)
+    print(f"Simulated trajectory {traj_id+1}/{num_trajectories}")
+
+all_data = np.vstack(all_data)
+np.savetxt("double_pendulum_batch.csv", all_data, delimiter=",",
+           header="t,theta1,theta1_dot,theta2,theta2_dot,trajectory_id", comments='')
+
+print(f"{num_trajectories} trajectories saved to double_pendulum_batch.csv")
+
+# ----------------------------
+# Prepare PCA
+# ----------------------------
+X_all = np.copy(all_data[:,1:5])
+
+# Wrap angles to [-pi, pi]
+X_all[:,0] = ((X_all[:,0] + np.pi) % (2*np.pi)) - np.pi
+X_all[:,2] = ((X_all[:,2] + np.pi) % (2*np.pi)) - np.pi
+
+# Scale
+X_scaled = StandardScaler().fit_transform(X_all)
+
+# 2D PCA
+pca2 = PCA(n_components=2)
+X_pca2 = pca2.fit_transform(X_scaled)
+print("Explained variance ratio (2D PCA):", pca2.explained_variance_ratio_)
+
+# 3D PCA
+pca3 = PCA(n_components=3)
+X_pca3 = pca3.fit_transform(X_scaled)
+print("Explained variance ratio (3D PCA):", pca3.explained_variance_ratio_)
+
+# ----------------------------
+# 2D PCA scatter (all trajectories)
+# ----------------------------
+plt.figure(figsize=(8,8))
+for traj_id in range(num_trajectories):
+    indices = all_data[:,-1] == traj_id
+    plt.scatter(X_pca2[indices,0], X_pca2[indices,1], s=2, alpha=0.5)
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("Double Pendulum PCA Projection (all trajectories)")
+plt.grid(True)
+plt.show()
+
+# ----------------------------
+# 2D PCA colored by time
+# ----------------------------
+plt.figure(figsize=(8,8))
+plt.scatter(X_pca2[:,0], X_pca2[:,1], c=all_data[:,0], cmap='viridis', s=2)
+plt.colorbar(label='Time')
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("PCA colored by time")
+plt.show()
+
+# ----------------------------
+# 3D PCA plot
+# ----------------------------
+fig = plt.figure(figsize=(8,8))
+ax = fig.add_subplot(111, projection='3d')
+ax.scatter(X_pca3[:,0], X_pca3[:,1], X_pca3[:,2], c=all_data[:,0], s=2, alpha=0.5, cmap='viridis')
+plt.title("3D PCA Projection (all trajectories)")
+plt.show()
+
+# ----------------------------
+# Phase space plot for a single trajectory
+# ----------------------------
+traj_id = 0
+traj = all_data[all_data[:,-1]==traj_id]
+plt.figure()
+plt.plot(traj[:,1], traj[:,2])
+plt.xlabel("theta1")
+plt.ylabel("theta1_dot")
+plt.title(f"Phase space for trajectory {traj_id}")
+plt.grid(True)
+plt.show()
