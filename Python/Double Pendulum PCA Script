@@ -1,0 +1,133 @@
+# -------------------------------------------------------------------
+# NOTES: How this Double Pendulum PCA Script Works
+# -------------------------------------------------------------------
+# Step 1: Install Python
+#   - Download Python 3.14 from python.org
+#   - Add Python to PATH during installation
+#   - Verify: python --version
+#
+# Step 2: Install required packages
+#   Run in CMD:
+#       python -m pip install numpy scipy matplotlib scikit-learn
+#   - numpy → arrays and math
+#   - scipy → ODE solver for the double pendulum
+#   - matplotlib → plotting
+#   - scikit-learn → scaling and PCA
+#
+# Step 3: Save the script
+#   - Copy this code into a file
+#   - Save as: double_pendulum_pca_fast.py
+#
+# Step 4: Run the script
+#   - Open CMD and navigate to script folder
+#       cd C:\Users\________\AppData\Local\Programs\Python\Python314
+#   - Run:
+#       python double_pendulum_pca_fast.py
+#   - Progress prints appear for each trajectory
+#   - CSV "double_pendulum_batch.csv" is created
+#   - PCA runs and a 2D scatter plot appears
+#
+# Step 5: How the script works
+#   1. Define double pendulum equations in deriv()
+#   2. Set simulation parameters: num_trajectories, t_span, t_eval
+#   3. Loop over trajectories:
+#       - Initialize slightly different angles
+#       - Integrate ODE with solve_ivp
+#       - Save time, angles, velocities, trajectory ID
+#   4. Combine trajectories into one array and save CSV
+#   5. Prepare PCA:
+#       - Wrap angles to [-π, π]
+#       - Scale variables with StandardScaler
+#       - Reduce to 2D with PCA
+#   6. Plot PCA projection of all trajectories
+#
+# Step 6: Next things you can explore
+#   - Color points by time or trajectory ID
+#   - Try 3D PCA (n_components=3)
+#   - Increase resolution: more trajectories or t_eval points
+#   - Save plots or CSVs for later analysis
+# -------------------------------------------------------------------
+
+import numpy as np
+from scipy.integrate import solve_ivp
+from sklearn.preprocessing import StandardScaler
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+
+# ----------------------------
+# Double pendulum parameters
+# ----------------------------
+m1 = m2 = 1.0
+l1 = l2 = 1.0
+g = 9.81
+
+def deriv(t, y):
+    theta1, z1, theta2, z2 = y
+    c = np.cos(theta1 - theta2)
+    s = np.sin(theta1 - theta2)
+    denom1 = (m1 + m2) * l1 - m2 * l1 * c**2
+    denom2 = (l2 / l1) * denom1
+    z1_dot = ((m2 * l2 * z2**2 * s - m2 * g * np.sin(theta2) * c - (m1 + m2) * g * np.sin(theta1)) / denom1)
+    z2_dot = (((m1 + m2) * (l1 * z1**2 * s - g * np.sin(theta2) + g * np.sin(theta1) * c)) / denom2)
+    return [z1, z1_dot, z2, z2_dot]
+
+# ----------------------------
+# Simulation settings
+# ----------------------------
+num_trajectories = 100
+t_span = (0, 20)
+t_eval = np.linspace(*t_span, 300)  # fewer points for speed
+
+all_data = []
+
+# ----------------------------
+# Simulate trajectories
+# ----------------------------
+for traj_id in range(num_trajectories):
+    y0 = [
+        np.pi/2 + np.random.uniform(-0.01, 0.01),
+        0,
+        np.pi/2 + np.random.uniform(-0.01, 0.01),
+        0
+    ]
+    sol = solve_ivp(deriv, t_span, y0, t_eval=t_eval, method='RK23')  # faster method
+    traj_data = np.vstack([sol.t, sol.y, np.full(sol.t.shape, traj_id)]).T
+    all_data.append(traj_data)
+    print(f"Simulated trajectory {traj_id+1}/{num_trajectories}")
+
+all_data = np.vstack(all_data)
+np.savetxt("double_pendulum_batch.csv", all_data, delimiter=",",
+           header="t,theta1,theta1_dot,theta2,theta2_dot,trajectory_id", comments='')
+
+print(f"{num_trajectories} trajectories saved to double_pendulum_batch.csv")
+
+# ----------------------------
+# Prepare PCA
+# ----------------------------
+X_all = np.copy(all_data[:,1:5])
+
+# Wrap angles
+X_all[:,0] = ((X_all[:,0] + np.pi) % (2*np.pi)) - np.pi
+X_all[:,2] = ((X_all[:,2] + np.pi) % (2*np.pi)) - np.pi
+
+# Scale
+X_scaled = StandardScaler().fit_transform(X_all)
+
+# PCA
+pca = PCA(n_components=2)
+X_pca = pca.fit_transform(X_scaled)
+print("Explained variance ratio:", pca.explained_variance_ratio_)
+
+# ----------------------------
+# Plot all trajectories
+# ----------------------------
+plt.figure(figsize=(8,8))
+for traj_id in range(num_trajectories):
+    indices = all_data[:,-1] == traj_id
+    plt.scatter(X_pca[indices,0], X_pca[indices,1], s=2, alpha=0.5)
+plt.xlabel("PC1")
+plt.ylabel("PC2")
+plt.title("Double Pendulum PCA Projection (all trajectories)")
+plt.grid(True)
+plt.show()
+
