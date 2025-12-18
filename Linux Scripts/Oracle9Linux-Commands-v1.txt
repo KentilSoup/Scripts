@@ -1,0 +1,62 @@
+# ---------------------------------------------------------------
+# Oracle9Linux-Commands-v1.txt
+# Description: Oracle Linux 9 - System Management Commands
+# Created By: Kent Fulton
+# Last Edited: 12-18-2025
+# ---------------------------------------------------------------
+# DISCLAIMER: See LICENSE and DISCLAIMER.md in the root of this repository.
+# ---------------------------------------------------------------
+# This script is provided "as-is" without any warranties, guarantees,
+# or assurances of any kind. Use of this script is at your own risk.
+#
+# The author assumes no responsibility or liability for any direct,
+# indirect, incidental, consequential, or punitive damages resulting
+# from the use, misuse, or inability to use this script.
+#
+# It is the user's responsibility to review, test, and validate the
+# script in a safe environment before deploying it in production.
+#
+# By using this script, you acknowledge that you understand and accept
+# these terms. If you do not agree, do not use this script.
+# ---------------------------------------------------------------
+
+# List all active services on Oracle Linux 9 (systemd-based):
+systemctl list-units --type=service --state=running
+
+# Specifically check service SSHD (SSH/SFTP):
+systemctl status sshd
+
+# Check CPU & Memory Load:
+Top
+
+# Check Uptime
+Uptime
+
+# Check sshd service status
+systemctl status sshd
+
+# Show detailed SSH proccesses 
+ps -ef | grep sshd
+
+# Show all SSH sessions (including SFTP)
+ss -tnp | grep sshd
+
+# Check active SFTP sessions:
+ps -ef | grep internal-sftp
+
+# Check for zombie processes and their parent
+ps -eo pid,ppid,state,cmd | grep 'Z'
+
+# Check disk usage with:
+df -h
+
+# Show logged-in users:
+who
+Or
+w
+
+# Reload SSHD Service. Reloads the configuration without killing active sessions. However, if the service is stuck, reload may not fix it.
+sudo systemctl reload sshd
+
+# Restart SSHD Service.
+sudo systemctl restart sshd
