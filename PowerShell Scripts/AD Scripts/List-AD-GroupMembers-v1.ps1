@@ -34,7 +34,6 @@
 # these terms. If you do not agree, do not use this script.
 # -------------------------------------------------------------
 
-# Outputs "User1;User2;User3;" with no spaces or hidden line breaks.
 Import-Module ActiveDirectory
 
 # Specify AD Group
