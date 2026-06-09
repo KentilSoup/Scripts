@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------
-# vCenter-CL-VMCustomSpecs-Templates-Report.ps1
+# PowerCLI-vCenter-CL-VMCustomSpecs-Templates-Report.ps1
 # Created By: Kent Fulton
 # Last Edited: 06-09-2026
 # -----------------------------------------------------------------
